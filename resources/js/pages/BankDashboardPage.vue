@@ -50,28 +50,47 @@
                        <div class="form-group">
                            <label for="">Institution Name</label>
                             <select v-model="student.school_id" class="form-control"  >
-                                <option :value="null"  >Select Institution</option>
+                                <option value="null" disabled  >Select Institution</option>
                                 <option :value="school.id" v-for="(school, index) in schools" :key="index" > {{school.name}}</option>
                                
                             </select>
                        </div>
-                       <div class="form-group">
-                           <label for="">Student First Name</label>
-                           <input type="text" class="form-control" >
+                       <div class="row">
+                        <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Student First Name</label>
+                            <input type="text" v-model="student.firstname" class="form-control" >
+                        </div>
+                        </div>
+                        <div class="col-md-6" >
+                        <div class="form-group">
+                            <label for="">Last Name</label>
+                            <input type="text" v-model="student.lastname" class="form-control" >
+                        </div>
+                        </div>
                        </div>
-                       <div class="form-group">
-                           <label for="">Last Name</label>
-                           <input type="text" class="form-control" >
-                       </div>
-                       <div class="form-group">
-                            <label for="">Student Mobile</label>
-                           <input type="text" class="form-control" >
+                       <div class="row">
+                        <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Student Email</label>
+                            <input type="text" v-model="student.email" class="form-control" >
+                        </div>
+                        </div>
+                        <div class="col-md-6" >
+                        <div class="form-group">
+                            <label for="">Mobile</label>
+                            <input type="text" v-model="student.mobile" class="form-control" >
+                        </div>
+                        </div>
                        </div>
                        <div class="form-group">
                              <label for="">Voucher Code</label>
-                           <input type="text" class="form-control" >
+                          <select v-model="student.voucher_id" class="form-control"  >
+                                <option value="null" disabled  >Select Institution</option>
+                                <option :value="voucher.id" v-for="(voucher, index) in vouchers" :key="index" > {{voucher.voucher_code}}</option>
+                            </select>
                        </div>
-                       <button @click="saveStudent()" class="btn btn-primary">Register</button>
+                       <button @click.prevent="saveStudent()" class="btn btn-primary">Register</button>
                    </form>
                </div>
            </div>
@@ -89,6 +108,7 @@ export default {
                 lastname: '',
                 mobile: '',
                 school_id: '',
+                voucher_id: '',
                 card: {}
             },
             card: {},

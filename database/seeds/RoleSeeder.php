@@ -27,20 +27,20 @@ class RoleSeeder extends Seeder
         $role = Role::create(['name' => 'Student']);
         $role = Role::create(['name' => 'CodeGen']);
 
-        $user1 = User::find(1);
-        $adminrole = Role::findByName('Admin');
-        $user1->assignRole([$adminrole->id]);
+        // $user1 = User::find(1);
+        // $adminrole = Role::findByName('Admin');
+        // $user1->assignRole([$adminrole->id]);
 
-        $user1 = User::find(2);
-        $wholesalerrole = Role::findByName('Bank');
-        $user1->assignRole([$wholesalerrole->id]);
+        // $user1 = User::find(2);
+        // $bankrole = Role::findByName('Bank');
+        // $user1->assignRole([$bankrole->id]);
 
-        $user1 = User::find(3);
-        $retailerrole = Role::findByName('Student');
-        $user1->assignRole([$retailerrole->id]);
+        // $user1 = User::find(3);
+        // $studentrole = Role::findByName('Student');
+        // $user1->assignRole([$studentrole->id]);
 
-        $user1 = User::find(4);
-        $customerrole = Role::findByName('CodeGen');
-        $user1->assignRole([$customerrole->id]);
+        // $user1 = User::find(4);
+        // $codegent = Role::findByName('CodeGen');
+        // $user1->assignRole([$codegent->id]);
     }
 }

@@ -13,7 +13,6 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        
         $connection = config('database.default');
         $driver = config("database.connections.{$connection}.driver");
 
@@ -26,8 +25,13 @@ class UserTableSeeder extends Seeder
 
         DB::table('users')->insert([
                 [
+                    'name' => "Super Admin VVC",
+                    "type" =>"admin",
+                    'email' => "admin@vvc.com",
+                    'password' => bcrypt('secret'),
+                ],
+                [
                     'name' => "Admin VVC",
-                    'firstname' => "Admin",
                     "type" =>"admin",
                     'email' => "admin@vvc.com",
                     'password' => bcrypt('secret'),
