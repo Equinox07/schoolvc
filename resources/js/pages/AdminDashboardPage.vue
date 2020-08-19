@@ -1,6 +1,14 @@
 <template>
   <div>
-      <div class="row">
+    <div class="container">
+      <div class="card">
+          <div class="card-header">Welcome Admin</div>
+          <div class="card-body">
+              <button class="btn btn-primary">Generate Card</button>
+              <button   class="btn btn-info">Deactivate Cards</button>
+          </div>
+      </div>
+      <div class="row mt-4">
           <div class="col-md-4">
             <div class="card">
                 <div class="card-body">
@@ -23,6 +31,7 @@
             </div>
           </div>
       </div>
+    </div>
   </div>
 </template>
 

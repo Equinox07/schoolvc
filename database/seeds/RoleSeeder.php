@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Student;
 use App\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -19,13 +20,14 @@ class RoleSeeder extends Seeder
         //reset the table
         if($driver == 'mysql') {
             DB::statement("SET FOREIGN_KEY_CHECKS=0");
+            DB::table('model_has_roles')->truncate();
             DB::table('roles')->truncate();
         }
 
-        $role = Role::create(['name' => 'Admin']);
-        $role = Role::create(['name' => 'Bank']);
-        $role = Role::create(['name' => 'Student']);
-        $role = Role::create(['name' => 'CodeGen']);
+        $role = Role::create(['name' => 'Admin', 'guard_name' => 'api']);
+        $role = Role::create(['name' => 'Bank', 'guard_name' => 'api']);
+        $role = Role::create(['name' => 'Student', 'guard_name' => 'api']);
+        $role = Role::create(['name' => 'CodeGen','guard_name' => 'api']);
 
         // $user1 = User::find(1);
         // $adminrole = Role::findByName('Admin');
@@ -35,9 +37,10 @@ class RoleSeeder extends Seeder
         // $bankrole = Role::findByName('Bank');
         // $user1->assignRole([$bankrole->id]);
 
-        // $user1 = User::find(3);
-        // $studentrole = Role::findByName('Student');
-        // $user1->assignRole([$studentrole->id]);
+        $students = Student::all();
+        $studentrole = Role::findByName('Student', 'api');
+        $students->each->assignRole([$studentrole->id]);
+        // $students->assignRole([$studentrole->id]);
 
         // $user1 = User::find(4);
         // $codegent = Role::findByName('CodeGen');

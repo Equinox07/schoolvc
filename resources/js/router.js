@@ -6,6 +6,7 @@ import LoginPage from './pages/LoginPage.vue';
 import DefaultLayout from './pages/DefaultLayout.vue';
 import StudentVoucherPage from './pages/StudentVoucherPage.vue';
 import BankDashboardPage from './pages/BankDashboardPage.vue';
+import AdminDashboardPage from './pages/AdminDashboardPage.vue';
 
 Vue.use(VueRouter);
 
@@ -18,6 +19,7 @@ const routes =
                     { path: '/login', component: LoginPage },
                     { path: '/student', component: StudentVoucherPage, name: 'student.page' },
                     { path: '/bank', component: BankDashboardPage, name: 'bank.dashboard' },
+                    { path: '/dashboard', component: AdminDashboardPage, name: 'admin.dashboard' },
                 ]
             },
             

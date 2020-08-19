@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\Student;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class StudentController extends Controller
@@ -46,6 +49,7 @@ class StudentController extends Controller
         $data = Validator::make($request->all(), [
             'firstname' => 'required|string',
             'lastname' => 'required|string',
+            'email' => 'required' ,
             'mobile' => 'required|min:10' ,
         ]);
         if ($data->fails()) {
@@ -54,10 +58,12 @@ class StudentController extends Controller
 
         $data = $request->all();
 
-        $data['slug'] = $request->firstname.' '.$request->lastname;
+        $data['password'] = Hash::make(123456);
+        $data['slug'] = Str::slug($request->firstname.' '.$request->lastname);
         $student = $this->student::create($data);
+        $response['token'] = $token = JWTAuth::fromUser($student);
 
-        return response()->json($student);
+        return response()->json($response);
 
     }
 
