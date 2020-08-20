@@ -18,6 +18,19 @@ class Student extends Authenticatable implements JWTSubject
 
     public static $guard_name = "api";
 
+
+
+        
+    public function vouchers()
+    {
+        return $this->belongsToMany(Voucher::class);
+    }
+
+    public function details()
+    {
+        return $this->hasMany(StudentDetail::class);
+    }
+        
        /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *

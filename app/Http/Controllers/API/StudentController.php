@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\Student;
+use App\Models\Voucher;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -12,10 +13,11 @@ use Illuminate\Support\Facades\Validator;
 
 class StudentController extends Controller
 {
-    public $student;
-    public function __construct(Student $student)
+    public $student, $voucher;
+    public function __construct(Student $student, Voucher $voucher)
     {
         $this->student = $student;
+        $this->voucher = $voucher;
     }
     /**
      * Display a listing of the resource.
@@ -62,6 +64,12 @@ class StudentController extends Controller
         $data['slug'] = Str::slug($request->firstname.' '.$request->lastname);
         $student = $this->student::create($data);
         $response['token'] = $token = JWTAuth::fromUser($student);
+
+
+        $student->vouchers()->attach($request->voucher_id);
+        $student->details()->create(['school_id' => $request->school_id]);
+        $this->voucher::find($request->voucher_id)->update(['sold_out' => 1]);
+
 
         return response()->json($response);
 

@@ -11,6 +11,13 @@ class Voucher extends Model
 
 
 
+    
+    public function students()
+    {
+        return $this->belongsToMany(Student::class);
+    }
+    
+
     public function scopeNotSold($query)
     {
         return $query->where('sold_out', 0);

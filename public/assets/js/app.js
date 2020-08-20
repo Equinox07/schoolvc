@@ -2294,21 +2294,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       student: {
-        firstname: '',
-        lastname: '',
-        mobile: '',
-        school_id: '',
-        voucher_id: '',
+        firstname: "",
+        lastname: "",
+        mobile: "",
+        school_id: "",
+        voucher_id: "",
         card: {}
       },
       card: {},
@@ -2321,30 +2315,34 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       console.log("Voucher Generated...", this.card);
     },
     registerStudent: function registerStudent() {
-      this.$modal.show('register-student');
+      this.$modal.show("register-student");
     },
     saveStudent: function saveStudent() {
-      console.log("Register Student", this.student);
-    },
-    loadSchool: function loadSchool() {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var data;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
-                return axios.get('api/schools').then(function (_ref) {
+                data = _this.student;
+                _context.next = 3;
+                return axios.post("api/students", data).then(function (_ref) {
                   var data = _ref.data;
-                  _this.schools = data;
-                  console.log(_this.schools);
+                  console.log(data);
+
+                  _this.$modal.hide("register-student");
+
+                  _this.student = {};
+
+                  _this.loadVouchers();
                 })["catch"](function (_ref2) {
                   var response = _ref2.response;
                   console.log(response);
                 });
 
-              case 2:
+              case 3:
               case "end":
                 return _context.stop();
             }
@@ -2352,7 +2350,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    loadVouchers: function loadVouchers() {
+    loadSchool: function loadSchool() {
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
@@ -2361,10 +2359,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios.get('api/vouchers').then(function (_ref3) {
+                return axios.get("api/schools").then(function (_ref3) {
                   var data = _ref3.data;
-                  _this2.vouchers = data;
-                  console.log(_this2.vouchers);
+                  _this2.schools = data;
                 })["catch"](function (_ref4) {
                   var response = _ref4.response;
                   console.log(response);
@@ -2376,6 +2373,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee2);
+      }))();
+    },
+    loadVouchers: function loadVouchers() {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return axios.get("api/vouchers").then(function (_ref5) {
+                  var data = _ref5.data;
+                  _this3.vouchers = data;
+                })["catch"](function (_ref6) {
+                  var response = _ref6.response;
+                  console.log(response);
+                });
+
+              case 2:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
       }))();
     }
   },
@@ -39284,9 +39306,7 @@ var render = function() {
           _c("div", [
             _c("div", { staticClass: "card" }, [
               _c("div", { staticClass: "card-header" }, [
-                _vm._v(
-                  "\n                 ENTER STUDENT DETAILS\n             "
-                )
+                _vm._v("ENTER STUDENT DETAILS")
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
@@ -39339,7 +39359,7 @@ var render = function() {
                           return _c(
                             "option",
                             { key: index, domProps: { value: school.id } },
-                            [_vm._v(" " + _vm._s(school.name))]
+                            [_vm._v(_vm._s(school.name))]
                           )
                         })
                       ],
@@ -39526,14 +39546,14 @@ var render = function() {
                         _c(
                           "option",
                           { attrs: { value: "null", disabled: "" } },
-                          [_vm._v("Select Institution")]
+                          [_vm._v("Select Voucher")]
                         ),
                         _vm._v(" "),
                         _vm._l(_vm.vouchers, function(voucher, index) {
                           return _c(
                             "option",
                             { key: index, domProps: { value: voucher.id } },
-                            [_vm._v(" " + _vm._s(voucher.voucher_code))]
+                            [_vm._v(_vm._s(voucher.voucher_code))]
                           )
                         })
                       ],
@@ -39572,25 +39592,19 @@ var staticRenderFns = [
     return _c("div", { staticClass: "row mt-5" }, [
       _c("div", { staticClass: "col-md-4" }, [
         _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-body" }, [
-            _vm._v("\n                  Cards Generated 0\n              ")
-          ])
+          _c("div", { staticClass: "card-body" }, [_vm._v("Cards Generated 0")])
         ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-4" }, [
         _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-body" }, [
-            _vm._v("\n                  Students 0\n              ")
-          ])
+          _c("div", { staticClass: "card-body" }, [_vm._v("Students 0")])
         ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-4" }, [
         _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-body" }, [
-            _vm._v("\n                  Active 0\n              ")
-          ])
+          _c("div", { staticClass: "card-body" }, [_vm._v("Active 0")])
         ])
       ])
     ])
