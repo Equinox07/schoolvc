@@ -2077,10 +2077,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      vouchers: {}
+      vouchers: {},
+      student_stats: {},
+      voucher_stats: {},
+      school_stats: {},
+      voucher_soldout_stats: {}
     };
   },
   methods: {
@@ -2093,10 +2102,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios.get("api/generate_code").then(function (_ref) {
+                return axios.post("api/generate_code").then(function (_ref) {
                   var data = _ref.data;
                   _this.vouchers = data;
-                  console.log(_this.vouchers);
+
+                  _this.loadDashboardStats();
                 })["catch"](function (_ref2) {
                   var response = _ref2.response;
                   console.log(response);
@@ -2122,7 +2132,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return axios.get("api/vouchers").then(function (_ref3) {
                   var data = _ref3.data;
                   _this2.vouchers = data;
-                  console.log(_this2.vouchers);
                 })["catch"](function (_ref4) {
                   var response = _ref4.response;
                   console.log(response);
@@ -2135,10 +2144,39 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee2);
       }))();
+    },
+    loadDashboardStats: function loadDashboardStats() {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return axios.get("api/admin_dashboard_stats").then(function (_ref5) {
+                  var data = _ref5.data;
+                  _this3.student_stats = data.student;
+                  _this3.voucher_stats = data.voucher;
+                  _this3.school_stats = data.schools;
+                  _this3.voucher_soldout_stats = data.sold_out;
+                })["catch"](function (_ref6) {
+                  var response = _ref6.response;
+                  console.log(response);
+                });
+
+              case 2:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
     }
   },
   mounted: function mounted() {
     this.loadVouchers();
+    this.loadDashboardStats();
   }
 });
 
@@ -39123,36 +39161,59 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._m(0)
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mt-4" }, [
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-body" }, [_vm._v("Cards Generated 0")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-body" }, [_vm._v("Sold Out 0")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-body" }, [_vm._v("Students 0")])
+      _c("div", { staticClass: "row mt-4" }, [
+        _c("div", { staticClass: "col-md-3" }, [
+          _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "card-body" }, [
+              _vm._v(
+                "Cards Generated " +
+                  _vm._s(_vm.voucher_stats.count ? _vm.voucher_stats.count : 0)
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-3" }, [
+          _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "card-body" }, [
+              _vm._v(
+                "Sold Out " +
+                  _vm._s(
+                    _vm.voucher_soldout_stats.count
+                      ? _vm.voucher_soldout_stats.count
+                      : 0
+                  )
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-3" }, [
+          _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "card-body" }, [
+              _vm._v(
+                "Students " +
+                  _vm._s(_vm.student_stats.count ? _vm.student_stats.count : 0)
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-3" }, [
+          _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "card-body" }, [
+              _vm._v(
+                "Schools " +
+                  _vm._s(_vm.school_stats.count ? _vm.school_stats.count : 0)
+              )
+            ])
+          ])
         ])
       ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 

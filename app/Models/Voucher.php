@@ -15,4 +15,9 @@ class Voucher extends Model
     {
         return $query->where('sold_out', 0);
     }
+
+    public function scopeSoldOut($query)
+    {
+        return $query->where('sold_out', 1);
+    }
 }

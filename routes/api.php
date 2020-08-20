@@ -26,6 +26,7 @@ Route::group(['namespace' => 'API'], function() {
 
     Route::apiResource('users', 'UserController');
     Route::post('generate_code', 'GenerateVoucherContoller@generateVoucher');
+    Route::get('admin_dashboard_stats', 'AdminDashboardController@loadStats');
     Route::apiResource('schools', 'SchoolController');
     Route::apiResource('students', 'StudentController');
     Route::apiResource('vouchers', 'VoucherController');
