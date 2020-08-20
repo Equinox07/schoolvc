@@ -126,8 +126,8 @@ export default {
         saveStudent(){
             console.log("Register Student", this.student)
         },
-       async loadSchool() {
-             await axios.get('api/schools')
+    async loadSchool() {
+            await axios.get('api/schools')
                     .then(({data}) => {
                         this.schools = data;
                         console.log(this.schools)

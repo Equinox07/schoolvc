@@ -24,12 +24,17 @@
         </router-link>
         </li>
         <li class="nav-item">
+        <router-link to="/bank" class="nav-link">
+          Bank
+        </router-link>
+        </li>
+        <li class="nav-item">
         <router-link to="/student" class="nav-link">
           Student
         </router-link>
         </li>
         <li class="nav-item">
-        <router-link to="/login" class="nav-link">
+        <router-link :to="{name: 'admin.dashboard'}" class="nav-link">
           Admin
         </router-link>
         </li>
