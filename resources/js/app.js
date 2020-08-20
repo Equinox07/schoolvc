@@ -7,6 +7,8 @@ import VModal from 'vue-js-modal';
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+// import  "assets/css/bootstrap.min.css";
+
 require('./bootstrap');
 
 window.Vue = require('vue');
